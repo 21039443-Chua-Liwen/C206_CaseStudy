@@ -8,7 +8,7 @@ public class Item {
 	
 	public Item (String name, String description) {
 		this.name = name;
-		this.description = description;
+		this.description = description; 
 		this.minbidprice = 0;
 		this.startdate = "";
 		this.enddate = "";
