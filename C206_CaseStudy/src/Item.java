@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Item {
 	private String name; 
 	private String description; 
@@ -9,12 +12,18 @@ public class Item {
 	public Item (String name, String description) {
 		this.name = name;
 		this.description = description; 
-		this.minbidprice = 0;
-		this.startdate = "";
-		this.enddate = "";
-		this.bidincrement = 0;
 	}
 	
+	public Item(String name, String description, double minbidprice, String startdate, String enddate,
+			double bidincrement) {
+		this.name = name;
+		this.description = description;
+		this.minbidprice = minbidprice;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.bidincrement = bidincrement;
+	}
+
 	public String getName() { 
 		return name; 
 	}
@@ -34,7 +43,7 @@ public class Item {
 	public String getEnddate() {
 		return enddate;
 	}
-
+	
 	public double getBidincrement() {
 		return bidincrement;
 	}

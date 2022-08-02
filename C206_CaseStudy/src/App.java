@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class App {
 
@@ -9,15 +10,16 @@ public class App {
 		
 		ArrayList<Category> catList = new ArrayList<Category>(); 
 		ArrayList<Item> itemList = new ArrayList<Item>();
+		itemList.add(new Item("Test Name", "Test Description", 3, "12/12/2022", "30/12/12022", 5));
 		ArrayList<Bid> bidList = new ArrayList<Bid>();
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
 	
-	int option = 0;
+		int option = 0;
 
-	while (option != 6) {
+		while (option != 6) {
 
-		App.menu();
-		option = Helper.readInt("Enter an option > ");
+			App.menu();
+			option = Helper.readInt("Enter an option > ");
 
 		if (option == 1) { // ADD, VIEW AND DELETE USER 
 			int UserChoice = 0; 
@@ -73,6 +75,30 @@ public class App {
 			}
 			
 		} else if (option == 3) {
+			int itemChoice = 0; 
+			while (itemChoice != 4) {
+
+				ItemMenu();
+				itemChoice= Helper.readInt("Enter an option > ");
+				
+				//add
+				if (itemChoice == 1) {
+					App.setHeader("ADD");
+					Item i = inputItem(); 
+					App.addItem(itemList, i);
+					System.out.println("Item added");
+					
+				//view 
+				} else if (itemChoice == 2) {
+					App.viewAllItems(itemList);
+									
+				
+				//delete
+				} else if (itemChoice == 3) {
+					App.setHeader("DELETE");
+					App.deleteItem(itemList); 	
+				} 
+			}
 			
 		} else if (option == 4) {
 			
@@ -114,6 +140,8 @@ public class App {
 		System.out.println("1. Add User");
 		System.out.println("2. View User");
 		System.out.println("3. Delete User");
+		System.out.println("4. Quit");
+		
 	}
 
 	//retrieve all user 
@@ -193,6 +221,7 @@ public class App {
 			System.out.println("1. Add Category");
 			System.out.println("2. View Category");
 			System.out.println("3. Delete Category");
+			System.out.println("4. Quit");
 		}
 
 		//retrieve all user 
@@ -253,4 +282,77 @@ public class App {
 				System.out.println("Category deleted"); 
 			}
 		}
-	}
+//================================= Option 3 Items (ADD/VIEW/DELET) =================================
+		// Item Menu
+		private static void ItemMenu() {
+			App.setHeader("ITEM OPTON");
+			System.out.println("1. Add Item");
+			System.out.println("2. View Item");
+			System.out.println("3. Delete Item");
+			System.out.println("4. Quit");
+		}
+		
+		//retrieve all user 
+		public static String retrieveAllItem (ArrayList <Item> itemList) {
+			String output = "";
+			for (int i = 0; i < itemList.size(); i++) {
+				output += String.format ("%-15s %-30s %-25.2f %-25s %-20s %-20.2f\n", 
+						itemList.get(i).getName(), itemList.get(i).getDescription(), itemList.get(i).getMinbidprice(),
+						itemList.get(i).getStartdate(), itemList.get(i).getEnddate(), itemList.get(i).getBidincrement());
+			}
+				return output;
+		}
+		
+		// add user 
+		public static Item inputItem() {
+			String name = Helper.readString("Enter item name > ");
+			String description = Helper.readString("Enter description of item > ");
+			double minBidPrice = Helper.readDouble("Enter minimum bid price for item > ");
+			String startDate = Helper.readString("Enter Auction Start Date > ");
+			String endDate = Helper.readString("Enter Auction End Date > ");
+			double bidIncrement = Helper.readDouble("Enter Bid Increment > ");
+			Item i = new Item (name, description, minBidPrice, startDate, endDate, bidIncrement);
+			
+			return i;
+		}
+				
+		public static void addItem (ArrayList<Item> itemList, Item i) {
+			itemList.add(i); 
+		}
+		
+		
+		// View item
+		public static void viewAllItems(ArrayList<Item> itemList) {
+			String output = String.format("%-15s %-30s %-25s %-25s %-20s %-20s\n", "ITEM NAME", "ITEM DESCRIPTION", "MINIMUM BID PRICE", 
+					"AUCTION START DATE", "AUCTION END DATE", "BID INCREMENT");
+			output += retrieveAllItem(itemList);	
+			System.out.println(output);
+		}
+				
+		
+		//Delete Item
+		public static boolean doDeleteItem (ArrayList<Item> itemList, String name) {
+			boolean isDeleted = false; 	
+			for (int i = 0; i < itemList.size(); i++ ) {
+				if (name.equalsIgnoreCase(itemList.get(i).getName())) { 
+					itemList.remove(i); 
+					isDeleted = true; 		
+				}		
+			}
+			return isDeleted; 
+		}
+
+		
+		public static void deleteItem (ArrayList<Item> itemList) {
+			retrieveAllItem(itemList);
+			String name = Helper.readString("Enter name > ");
+			Boolean isDeleted = doDeleteItem(itemList,name); 	
+					
+			if (isDeleted == false) { 
+				System.out.println("Item cannot be deleted"); 
+						
+			} else { 
+				System.out.println("Item deleted"); 
+			}
+		}
+}
