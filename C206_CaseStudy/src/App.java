@@ -7,7 +7,7 @@ public class App {
 		ArrayList<User> userList = new ArrayList<User>();
 		userList.add(new User("KEN","Student", "ken191@gmail.com","dskjdwd"));
 		
-		ArrayList<Category> categoryList = new ArrayList<Category>(); 
+		ArrayList<Category> catList = new ArrayList<Category>(); 
 		ArrayList<Item> itemList = new ArrayList<Item>();
 		ArrayList<Bid> bidList = new ArrayList<Bid>();
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
@@ -45,7 +45,32 @@ public class App {
 				}
 			}
 						
-		} else if (option == 2) {
+		} else if (option == 2) { // ADD, VIEW AND DELETE CATEGORY
+		
+			int CatChoice = 0; 
+			while (CatChoice != 4) {
+
+				CatMenu();
+				CatChoice= Helper.readInt("Enter an option > ");
+				
+				//add
+				if (CatChoice == 1) {
+					App.setHeader("ADD");
+					Category ii = inputCat(); 
+					App.addCat(catList, ii);
+					System.out.println("Category added");
+					
+				//view 
+				} else if (CatChoice == 2) {
+					App.viewAllcat(catList);
+									
+				
+				//delete
+				} else if (CatChoice == 3) {
+					App.setHeader("DELETE");
+					App.deleteCat(catList); 	
+				}
+			}
 			
 		} else if (option == 3) {
 			
@@ -62,15 +87,7 @@ public class App {
 	}
 
 }
-	private static void UserMenu() {
-		
-		App.setHeader("USER OPTON");
-		System.out.println("1. Add User");
-		System.out.println("2. View User");
-		System.out.println("3. Delete User");
-		
-	}
-	
+
 	public static void menu() {
 			App.setHeader("CAMPUS ONLINE AUCTION SHOP");
 			System.out.println("1. User Account");
@@ -91,6 +108,14 @@ public class App {
 
 	//================================= Option 1 USER (ADD/VIEW/DELET) =================================
 	
+	//user menu
+	private static void UserMenu() {
+		App.setHeader("USER OPTON");
+		System.out.println("1. Add User");
+		System.out.println("2. View User");
+		System.out.println("3. Delete User");
+	}
+
 	//retrieve all user 
 	public static String retrieveAllUser (ArrayList <User> userList) {
 		String output = "";
@@ -156,7 +181,76 @@ public class App {
 			System.out.println("Invalid email"); 
 			
 		}else{ 
-			System.out.println("User deleted"); 
+			System.out.println("User deleted");
+			
 		}
 	}
-}
+//================================= Option 2 CATEGORY (ADD/VIEW/DELET) =================================
+		
+		//user menu
+		private static void CatMenu() {
+			App.setHeader("CATEGORY OPTON");
+			System.out.println("1. Add Category");
+			System.out.println("2. View Category");
+			System.out.println("3. Delete Category");
+		}
+
+		//retrieve all user 
+		public static String retrieveAllCat (ArrayList <Category> catList) {
+			String output = "";
+
+			for (int i = 0; i < catList.size(); i++) {
+				
+				output += String.format ("%-10s\n", catList.get(i).getName());
+			}
+			return output;
+		}
+		
+		
+		// add user 
+		public static Category inputCat() {
+			String name = Helper.readString("Enter name > ");
+	
+			Category ca = new Category (name);
+			return ca;
+		}
+		
+		public static void addCat (ArrayList<Category> catList, Category ca) {
+			catList.add(ca); 
+		}
+		
+		
+		// view user
+		public static void viewAllcat(ArrayList<Category> catList) {
+			String output = String.format("%-10s\n", "NAME" );
+			output += retrieveAllCat(catList);	
+			System.out.println(output);
+		}
+		
+		//delete user
+		public static boolean dodeletecat (ArrayList<Category> catList, String name) {
+			boolean isDeleted = false; 
+			
+			for (int i = 0; i < catList.size(); i++ ) {
+				if (name.equalsIgnoreCase(catList.get(i).getName())) { 
+					
+					catList.remove(i); 
+					isDeleted = true; 		
+				}		
+			}
+			return isDeleted; 
+		}
+
+		public static void deleteCat (ArrayList<Category> catList) {
+			retrieveAllCat(catList);
+			String name = Helper.readString("Enter name > ");
+			Boolean isDeleted = dodeletecat(catList,name); 	
+			
+			if (isDeleted == false) { 
+				System.out.println("Invalid category"); 
+				
+			}else{ 
+				System.out.println("Category deleted"); 
+			}
+		}
+	}
