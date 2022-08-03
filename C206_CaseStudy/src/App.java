@@ -6,13 +6,15 @@ public class App {
 	public static void main(String[] args) {
 		
 		ArrayList<User> userList = new ArrayList<User>();
-		userList.add(new User("KEN","Student", "ken191@gmail.com","dskjdwd"));
-		
 		ArrayList<Category> catList = new ArrayList<Category>(); 
 		ArrayList<Item> itemList = new ArrayList<Item>();
-		itemList.add(new Item("Test Name", "Test Description", 3, "12/12/2022", "30/12/12022", 5));
 		ArrayList<Bid> bidList = new ArrayList<Bid>();
 		ArrayList<Deal> dealList = new ArrayList<Deal>();
+		
+		//testing 
+//		userList.add(new User("KEN","Student", "ken191@gmail.com","dskjdwd"));
+//		itemList.add(new Item("Test Name", "Test Description", 3, "12/12/2022", "30/12/12022", 5));
+//		bidList.add(new Bid("Bid Name", 358, "Mary289@gmail.com", "David463@gmail.com", 10.00));
 	
 		int option = 0;
 
@@ -68,13 +70,13 @@ public class App {
 									
 				
 				//delete
-				} else if (CatChoice == 3) {
+				} else if (CatChoice == 3) { 
 					App.setHeader("DELETE");
 					App.deleteCat(catList); 	
 				}
 			}
 			
-		} else if (option == 3) {
+		} else if (option == 3) { // ADD, VIEW AND DELETE ITEMS
 			int itemChoice = 0; 
 			while (itemChoice != 4) {
 
@@ -100,7 +102,31 @@ public class App {
 				} 
 			}
 			
-		} else if (option == 4) {
+		} else if (option == 4) { // ADD, VIEW AND DELETE BID
+			int bidChoice = 0; 
+			while (bidChoice != 4) {
+
+				BidMenu();
+				bidChoice= Helper.readInt("Enter an option > ");
+				
+				//add
+				if (bidChoice == 1) {
+					App.setHeader("ADD");
+					Bid b = inputBid(); 
+					App.addBid(bidList, b);
+					System.out.println("Bid added");
+					
+				//view 
+				} else if (bidChoice == 2) {
+					App.viewAllBids(bidList);
+									
+				
+				//delete
+				} else if (bidChoice == 3) {
+					App.setHeader("DELETE");
+					App.deleteBid(bidList); 	
+				} 
+			}
 			
 		} else if (option == 5) {
 			
@@ -132,11 +158,11 @@ public class App {
 	}
 
 
-	//================================= Option 1 USER (ADD/VIEW/DELET) =================================
+	//================================= Option 1 USER (ADD/VIEW/DELETE) =================================
 	
 	//user menu
 	private static void UserMenu() {
-		App.setHeader("USER OPTON");
+		App.setHeader("USER OPTION");
 		System.out.println("1. Add User");
 		System.out.println("2. View User");
 		System.out.println("3. Delete User");
@@ -213,18 +239,18 @@ public class App {
 			
 		}
 	}
-//================================= Option 2 CATEGORY (ADD/VIEW/DELET) =================================
+//================================= Option 2 CATEGORY (ADD/VIEW/DELETE) =================================
 		
 		//user menu
 		private static void CatMenu() {
-			App.setHeader("CATEGORY OPTON");
+			App.setHeader("CATEGORY OPTION");
 			System.out.println("1. Add Category");
 			System.out.println("2. View Category");
 			System.out.println("3. Delete Category");
 			System.out.println("4. Quit");
 		}
 
-		//retrieve all user 
+		//retrieve all category 
 		public static String retrieveAllCat (ArrayList <Category> catList) {
 			String output = "";
 
@@ -236,7 +262,7 @@ public class App {
 		}
 		
 		
-		// add user 
+		// add category 
 		public static Category inputCat() {
 			String name = Helper.readString("Enter name > ");
 	
@@ -249,14 +275,14 @@ public class App {
 		}
 		
 		
-		// view user
+		// view category 
 		public static void viewAllcat(ArrayList<Category> catList) {
 			String output = String.format("%-10s\n", "NAME" );
 			output += retrieveAllCat(catList);	
 			System.out.println(output);
 		}
 		
-		//delete user
+		//delete category 
 		public static boolean dodeletecat (ArrayList<Category> catList, String name) {
 			boolean isDeleted = false; 
 			
@@ -282,17 +308,17 @@ public class App {
 				System.out.println("Category deleted"); 
 			}
 		}
-//================================= Option 3 Items (ADD/VIEW/DELET) =================================
+//================================= Option 3 ITEMS (ADD/VIEW/DELETE) =================================
 		// Item Menu
 		private static void ItemMenu() {
-			App.setHeader("ITEM OPTON");
+			App.setHeader("ITEM OPTION");
 			System.out.println("1. Add Item");
 			System.out.println("2. View Item");
 			System.out.println("3. Delete Item");
 			System.out.println("4. Quit");
 		}
 		
-		//retrieve all user 
+		//retrieve all item
 		public static String retrieveAllItem (ArrayList <Item> itemList) {
 			String output = "";
 			for (int i = 0; i < itemList.size(); i++) {
@@ -303,7 +329,7 @@ public class App {
 				return output;
 		}
 		
-		// add user 
+		// add item 
 		public static Item inputItem() {
 			String name = Helper.readString("Enter item name > ");
 			String description = Helper.readString("Enter description of item > ");
@@ -330,7 +356,7 @@ public class App {
 		}
 				
 		
-		//Delete Item
+		//Delete item
 		public static boolean doDeleteItem (ArrayList<Item> itemList, String name) {
 			boolean isDeleted = false; 	
 			for (int i = 0; i < itemList.size(); i++ ) {
@@ -349,10 +375,84 @@ public class App {
 			Boolean isDeleted = doDeleteItem(itemList,name); 	
 					
 			if (isDeleted == false) { 
-				System.out.println("Item cannot be deleted"); 
+				System.out.println("Item cannot be found"); 
 						
 			} else { 
 				System.out.println("Item deleted"); 
 			}
 		}
+//================================= Option 4 BID (ADD/VIEW/DELETE) =================================
+		// Bid Menu
+		private static void BidMenu() {
+			App.setHeader("BID OPTION");
+			System.out.println("1. Add Bid");
+			System.out.println("2. View Bid");
+			System.out.println("3. Delete Bid");
+			System.out.println("4. Quit");
+		}
+		
+		//retrieve all bid
+		public static String retrieveAllBid (ArrayList <Bid> BidList) {
+			String output = "";
+			for (int i = 0; i < BidList.size(); i++) {
+				output += String.format ("%-15s %-25d %-25s %-20s %-20.2f\n", 
+						BidList.get(i).getName(), BidList.get(i).getBidId(),
+						BidList.get(i).getSellerEmail(), BidList.get(i).getBuyerEmail(), BidList.get(i).getBidPrice());
+			}
+				return output;
+		}
+		// add bid 
+		public static Bid inputBid() {
+			String name = Helper.readString("Enter item name > ");
+//			String description = Helper.readString("Enter description of bid > ");
+			int id = Helper.readInt("Enter bid id > ");
+			String selleremail = Helper.readString("Enter seller email > ");
+			String buyeremail = Helper.readString("Enter buyer email > ");
+			double bidprice = Helper.readDouble("Enter bid price > ");
+			
+			Bid b = new Bid(name, id, selleremail, buyeremail, bidprice);
+			
+			return b;
+		}
+				
+		public static void addBid (ArrayList<Bid> bidList, Bid b) {
+			bidList.add(b); 
+		}
+		
+		
+		// View bid
+		public static void viewAllBids(ArrayList<Bid> bidList) {
+			String output = String.format("%-15s %-25s %-25s %-20s %-20s\n", "BID NAME", "BID ID", "SELLER EMAIL", 
+					"BUYER EMAIL", "BID PRICE");
+			output += retrieveAllBid(bidList);	
+			System.out.println(output);
+		}
+				
+		
+		//Delete bid
+		public static boolean doDeleteBid (ArrayList<Bid> bidList, int id) {
+			boolean isDeleted = false; 	
+			for (int i = 0; i < bidList.size(); i++ ) {
+				if (id==(bidList.get(i).getBidId())) { 
+					bidList.remove(i); 
+					isDeleted = true; 		
+				}		
+			}
+			return isDeleted; 
+		}
+
+		
+		public static void deleteBid (ArrayList<Bid> bidList) {
+			retrieveAllBid(bidList);
+			int id = Helper.readInt("Enter id > ");
+			Boolean isDeleted = doDeleteBid(bidList,id); 	
+					
+			if (isDeleted == false) { 
+				System.out.println("Bid does not exist"); 
+						
+			} else { 
+				System.out.println("Bid deleted"); 
+			}
+		}
+	
 }

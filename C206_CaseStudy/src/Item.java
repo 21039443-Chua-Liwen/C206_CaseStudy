@@ -9,9 +9,9 @@ public class Item {
 	private String enddate;
 	private double bidincrement; 
 	
-	public Item (String name, String description) {
+	public Item (String name) {
 		this.name = name;
-		this.description = description; 
+//		this.description = description; 
 	}
 	
 	public Item(String name, String description, double minbidprice, String startdate, String enddate,

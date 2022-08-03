@@ -4,8 +4,8 @@ public class Bid extends Item {
 	private String buyerEmail; 
 	private double bidPrice; 
 	
-	public Bid(String name, String description, int bidId, String sellerEmail, String buyerEmail, double bidPrice) {
-		super(name, description);
+	public Bid(String name, int bidId, String sellerEmail, String buyerEmail, double bidPrice) {
+		super(name);
 		this.bidId = bidId;
 		this.sellerEmail = sellerEmail;
 		this.buyerEmail = buyerEmail;
