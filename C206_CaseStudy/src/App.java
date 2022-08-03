@@ -497,7 +497,7 @@ public class App {
 			for (int i = 0; i < dealList.size(); i++) {
 				output += String.format ("%-15s %-25s %-25s %-20s %-20s %-20s\n", 
 						dealList.get(i).getName(), dealList.get(i).getDealID(),
-						dealList.get(i).getSellerEmail(), dealList.get(i).getBuyerEmail(), dealList.get(i).getTransPrice(), dealList.get(i).getEnddate());
+						dealList.get(i).getSellerEmail(), dealList.get(i).getBuyerEmail(), dealList.get(i).getTransPrice(), dealList.get(i).getEndDate());
 			}
 				return output;
 		}
