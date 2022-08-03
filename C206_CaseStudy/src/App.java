@@ -128,7 +128,31 @@ public class App {
 				} 
 			}
 			
-		} else if (option == 5) {
+		} else if (option == 5) { // ADD, VIEW AND DELETE DEAL
+			int dealChoice = 0; 
+			while (dealChoice != 4) {
+
+				DealMenu();
+				dealChoice= Helper.readInt("Enter an option > ");
+				
+				//add
+				if (dealChoice == 1) {
+					App.setHeader("ADD");
+					Deal d = inputDeal(); 
+					App.addDeal(dealList, d);
+					System.out.println("Deal added");
+					
+				//view 
+				} else if (dealChoice == 2) {
+					App.viewAllDeal(dealList);
+									
+				
+				//delete
+				} else if (dealChoice == 3) {
+					App.setHeader("DELETE");
+					App.deleteDeal(dealList); 	
+				} 
+			}
 			
 		} else if (option == 6) {
 			System.out.println("Bye!");
@@ -152,9 +176,9 @@ public class App {
 	}
 	
 	public static void setHeader(String header) {
-		Helper.line(80, "-");
+		Helper.line(120, "-");
 		System.out.println(header);
-		Helper.line(80, "-");
+		Helper.line(120, "-");
 	}
 
 
@@ -404,7 +428,7 @@ public class App {
 		// add bid 
 		public static Bid inputBid() {
 			String name = Helper.readString("Enter item name > ");
-//			String description = Helper.readString("Enter description of bid > ");
+
 			int id = Helper.readInt("Enter bid id > ");
 			String selleremail = Helper.readString("Enter seller email > ");
 			String buyeremail = Helper.readString("Enter buyer email > ");
@@ -452,6 +476,82 @@ public class App {
 						
 			} else { 
 				System.out.println("Bid deleted"); 
+			}
+		}
+	
+
+
+//================================= Option 5 DEAL (ADD/VIEW/DELETE) =================================
+		// Deal Menu
+		private static void DealMenu() {
+			App.setHeader("DEAL OPTION");
+			System.out.println("1. Add Deal");
+			System.out.println("2. View Deal");
+			System.out.println("3. Delete Deal");
+			System.out.println("4. Quit");
+		}
+		
+		//retrieve all Deal
+		public static String retrieveAllDeal (ArrayList <Deal> DealList) {
+			String output = "";
+			for (int i = 0; i < DealList.size(); i++) {
+				output += String.format ("%-15s %-25s %-25s %-20s %-20s %-20s\n", 
+						DealList.get(i).getName(), DealList.get(i).getDealID(),
+						DealList.get(i).getSellerEmail(), DealList.get(i).getBuyerEmail(), DealList.get(i).getTransPrice(), DealList.get(i).getEnddate());
+			}
+				return output;
+		}
+		// add Deal
+		public static Deal inputDeal() {
+			String name = Helper.readString("Enter item name > ");
+			int id = Helper.readInt("Enter deal id > ");
+			String selleremail = Helper.readString("Enter seller email > ");
+			String buyeremail = Helper.readString("Enter buyer email > ");
+			double transactionprice = Helper.readDouble("Enter transaction price > ");
+			String endDate = Helper.readString("Enter close date > ");
+			
+			Deal d  = new Deal(name, id, selleremail, buyeremail, transactionprice, endDate);
+			
+			return d;
+		}
+					
+		public static void addDeal (ArrayList<Deal> DealList, Deal d) {
+			DealList.add(d); 
+		}
+		
+		
+		// View Deal
+		public static void viewAllDeal(ArrayList<Deal> DealList) {
+			String output = String.format("%-15s %-25s %-25s %-20s %-20s %-20s\n", "DEAL NAME", "BID ID", "SELLER EMAIL", 
+					"BUYER EMAIL", "TRANSACTION PRICE", "CLOSE DATE");
+			output += retrieveAllDeal(DealList);	
+			System.out.println(output);
+		}
+				
+		
+		//Delete deal
+		public static boolean doDeleteDeal (ArrayList<Deal> DealList, int id) {
+			boolean isDeleted = false; 	
+			for (int i = 0; i < DealList.size(); i++ ) {
+				if (id==(DealList.get(i).getDealID())) { 
+					DealList.remove(i); 
+					isDeleted = true; 		
+				}		
+			}
+			return isDeleted; 
+		}
+
+		
+		public static void deleteDeal (ArrayList<Deal> DealList) {
+			retrieveAllDeal(DealList);
+			int id = Helper.readInt("Enter id > ");
+			Boolean isDeleted = doDeleteDeal(DealList,id); 	
+					
+			if (isDeleted == false) { 
+				System.out.println("Deal does not exist"); 
+						
+			} else { 
+				System.out.println("Deal deleted"); 
 			}
 		}
 	

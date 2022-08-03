@@ -1,15 +1,15 @@
 
 public class Deal extends Item {
-	private String dealID; 
+	private int dealID; 
 	private String sellerEmail; 
 	private String buyerEmail; 
 	private double transPrice; 
 	private String localDate;
 	
-	public Deal(String name, String description, String dealID, String sellerEmail, String buyerEmail,
+	public Deal(String name, int dealID, String sellerEmail, String buyerEmail,
 			double transPrice, String localDate) {
 		
-		super(name, description);
+		super(name);
 		this.dealID = dealID;
 		this.sellerEmail = sellerEmail;
 		this.buyerEmail = buyerEmail;
@@ -17,7 +17,7 @@ public class Deal extends Item {
 		this.localDate = localDate;
 	}
 
-	public String getDealID() {
+	public int getDealID() {
 		return dealID;
 	}
 
