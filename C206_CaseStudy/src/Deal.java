@@ -4,17 +4,17 @@ public class Deal extends Item {
 	private String sellerEmail; 
 	private String buyerEmail; 
 	private double transPrice; 
-	private String localDate;
+	private String endDate;
 	
 	public Deal(String name, int dealID, String sellerEmail, String buyerEmail,
-			double transPrice, String localDate) {
+			double transPrice, String endDate) {
 		
 		super(name);
 		this.dealID = dealID;
 		this.sellerEmail = sellerEmail;
 		this.buyerEmail = buyerEmail;
 		this.transPrice = transPrice;
-		this.localDate = localDate;
+		this.endDate = endDate;
 	}
 
 	public int getDealID() {
@@ -33,7 +33,7 @@ public class Deal extends Item {
 		return transPrice;
 	}
 
-	public String getLocalDate() {
-		return localDate;
+	public String getEndDate() {
+		return endDate;
 	}
 }

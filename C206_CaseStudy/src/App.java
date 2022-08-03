@@ -492,12 +492,12 @@ public class App {
 		}
 		
 		//retrieve all Deal
-		public static String retrieveAllDeal (ArrayList <Deal> DealList) {
+		public static String retrieveAllDeal (ArrayList <Deal> dealList) {
 			String output = "";
-			for (int i = 0; i < DealList.size(); i++) {
+			for (int i = 0; i < dealList.size(); i++) {
 				output += String.format ("%-15s %-25s %-25s %-20s %-20s %-20s\n", 
-						DealList.get(i).getName(), DealList.get(i).getDealID(),
-						DealList.get(i).getSellerEmail(), DealList.get(i).getBuyerEmail(), DealList.get(i).getTransPrice(), DealList.get(i).getEnddate());
+						dealList.get(i).getName(), dealList.get(i).getDealID(),
+						dealList.get(i).getSellerEmail(), dealList.get(i).getBuyerEmail(), dealList.get(i).getTransPrice(), dealList.get(i).getEnddate());
 			}
 				return output;
 		}
@@ -515,8 +515,8 @@ public class App {
 			return d;
 		}
 					
-		public static void addDeal (ArrayList<Deal> DealList, Deal d) {
-			DealList.add(d); 
+		public static void addDeal (ArrayList<Deal> dealList, Deal d) {
+			dealList.add(d); 
 		}
 		
 		
