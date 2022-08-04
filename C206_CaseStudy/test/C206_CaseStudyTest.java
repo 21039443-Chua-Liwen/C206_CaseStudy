@@ -64,7 +64,7 @@ public class C206_CaseStudyTest {
 	
 //====================================== USER ==========================================================================
 	@Test
-	public void addUser() { 
+	public void testaddUser() { 
 		// user list is not null, so that can add a new user
 		assertNotNull("Test if there is valid user arraylist to add to", userList);
 		
@@ -83,7 +83,7 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void viewAllUser() {
+	public void testviewAllUser() {
 		// test if user list is not null but empty, so that can add a new item
 		assertNotNull("Test if there is valid User arraylist to add to", userList);
 		
@@ -107,7 +107,7 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void deleteUser() { 
+	public void testdeleteUser() { 
 		//given an empty list, after adding 2 user, the size of the list is 2
 		App.addUser(userList, uu1);	
 		App.addUser(userList, uu2);	
@@ -127,18 +127,18 @@ public class C206_CaseStudyTest {
 	
 	//====================================== CATEGORY ==========================================================================
 	@Test
-	public void addCat() { 
-		// user list is not null, so that can add a new category
+	public void testaddCat() { 
+		// category list is not null, so that can add a new category
 		assertNotNull("Test if there is valid Category arraylist to add to", userList);
 			
-		//given an empty list, after adding 1 category, the size of the list is 1
+		// given an empty list, after adding 1 category, the size of the list is 1
 		App.addCat(catList, cc1);		
 		assertEquals("Test if that user arraylist size is 1?", 1, catList.size());
 			
-		//The user just added is as same as the first category of the list
+		// the category just added is as same as the first category of the list
 		assertSame("Test that category is added same as 1st item of the list?", cc1, catList.get(0));
 			
-		//Add another user. Test The size of the list is 3
+		// add another category. Test The size of the list is 3
 		App.addCat(catList, cc2);
 		App.addCat(catList, cc3);
 		assertEquals("Test that category arraylist size is 3?", 3, catList.size());
@@ -146,20 +146,20 @@ public class C206_CaseStudyTest {
 	}
 		
 	@Test
-	public void viewAllcat() {
-		// test if user list is not null but empty, so that can add a new item
+	public void testretrieveAllcat() {
+		// test if category list is not null but empty, so that can add a new category
 		assertNotNull("Test if there is valid Category arraylist to add to", catList);
 			
-		//test if the list of user retrieved from the SourceCentre is empty
+		// test if the list of user retrieved from the SourceCentre is empty
 		String allCat = App.retrieveAllCat(catList);
 		String testOutput = "";
-		assertEquals("Check view all categoryList", testOutput, allCat);
+		assertEquals("Check that categoryList", testOutput, allCat);
 					
-		//Given an empty list, after adding 2 users, test if the size of the list is 2
+		// given an empty list, after adding 1 category, test if the size of the list is 1
 		App.addCat(catList, cc1);
-		assertEquals("Test if that Category arraylist size is 2?", 1, catList.size());
+		assertEquals("Test if that Category arraylist size is 1?", 1, catList.size());
 			
-		//test if the expected output string same as the list of user retrieved from the SourceCentre
+		// test if the expected output string same as the list of category retrieved from the SourceCentre
 		allCat= App.retrieveAllCat(catList);
 			
 		testOutput = String.format("%-10s\n","shoes");;
@@ -168,19 +168,19 @@ public class C206_CaseStudyTest {
 	}
 		
 	@Test
-	public void deleteCat() { 
-		//given an empty list, after adding 2 Category, the size of the list is 2
+	public void testdeleteCat() { 
+		// category list is not null, so that can delete a new Category
+		assertNotNull("Test if there is valid category arraylist to delete from", catList);
+				
+		// given an empty list, after adding 2 Category, the size of the list is 2
 		App.addCat(catList, cc1);	
 		App.addCat(catList, cc2);	
-		assertEquals("Test if that category arraylist size is 1?", 2, catList.size());
+		assertEquals("Test if that category arraylist size is 2?", 2, catList.size());
 			
-		//The Category added is as same as the first Category of the list
+		// the Category added is as same as the first Category of the list
 		assertSame("Test that category is added same as 1st category of the list?", cc1, catList.get(0));
 					
-		// Category list is not null, so that can delete a new Category
-		assertNotNull("Test if there is valid category arraylist to delete from", catList);
-			
-		//Delete category. test The size of the list is back to 1
+		//given a list with 2 category, deleting one would set list size back to 1 and second item will become second item in the list. 
 		App.dodeletecat(catList, cc1.getName());
 		assertEquals("Test that category arraylist size is 1?", 1, catList.size());
 		assertSame("Test that 2nd category added is the first item of the list?", cc2, catList.get(0));	
@@ -188,7 +188,7 @@ public class C206_CaseStudyTest {
 	
 	//====================================== ITEM ==========================================================================
 	@Test
-	public void addItem() { 
+	public void testaddItem() { 
 		// user list is not null, so that can add a new item
 		assertNotNull("Test if there is valid Item arraylist to add to", itemList);
 					
@@ -206,7 +206,7 @@ public class C206_CaseStudyTest {
 	}
 				
 	@Test
-	public void viewAllItem() {
+	public void testviewAllItem() {
 		// test if item list is not null but empty, so that can add a new item
 		assertNotNull("Test if there is valid Item arraylist to add to", itemList);
 			
@@ -227,7 +227,7 @@ public class C206_CaseStudyTest {
 	}
 				
 	@Test
-	public void deleteItem() { 
+	public void testdeleteItem() { 
 		//given an empty list, after adding 2 item, the size of the list is 2
 		App.addItem(itemList, ii1);	
 		App.addItem(itemList, ii2);	
@@ -245,9 +245,9 @@ public class C206_CaseStudyTest {
 		assertSame("Test that 2nd item added is the first item of the list?", ii2, itemList.get(0));	
 	}
 	
-	//====================================== Bid ==========================================================================
+	//====================================== BID ============================================================================================
 	@Test
-	public void addBid() { 
+	public void testaddBid() { 
 		// user list is not null, so that can add a new bid
 		assertNotNull("Test if there is valid bid arraylist to add to", bidList);
 							
@@ -266,7 +266,7 @@ public class C206_CaseStudyTest {
 	}
 						
 	@Test
-	public void viewAllBid() {
+	public void testviewAllBid() {
 		// test if bid list is not null but empty, so that can add a new bid
 		assertNotNull("Test if there is valid Item arraylist to add to", bidList);
 						
@@ -287,7 +287,7 @@ public class C206_CaseStudyTest {
 	}
 						
 	@Test
-	public void deleteBid() { 
+	public void testdeleteBid() { 
 		//given an empty list, after adding 2 bid, the size of the list is 2
 		App.addBid(bidList, bb1);	
 		App.addBid(bidList, bb2);	
@@ -305,9 +305,9 @@ public class C206_CaseStudyTest {
 		assertSame("Test that 2nd bid added is the first bid of the list?", bb2, bidList.get(0));	
 	}	
 			
-	//====================================== Deal ==========================================================================
+	//====================================== DEAL ===========================================================================================
 	@Test
-	public void addDeal() { 
+	public void testaddDeal() { 
 
 		// deal list is not null, so that can add a new deal
 		assertNotNull("Test if there is valid deal arraylist to add to", dealList);
@@ -327,7 +327,7 @@ public class C206_CaseStudyTest {
 	}
 							
 	@Test
-	public void viewAllDeal() {
+	public void testviewAllDeal() {
 		// test if user list is not null but empty, so that can add a new item
 		assertNotNull("Test if there is valid Item arraylist to add to", dealList);
 							
@@ -348,7 +348,7 @@ public class C206_CaseStudyTest {
 	}
 							
 	@Test
-	public void deleteDeal() { 
+	public void testdeleteDeal() { 
 		//given an empty list, after adding 2 deal, the size of the list is 2
 		App.addDeal(dealList, dd1);	
 		App.addDeal(dealList, dd2);	
